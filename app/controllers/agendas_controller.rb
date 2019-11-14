@@ -20,7 +20,11 @@ class AgendasController < ApplicationController
       render :new
     end
   end
-
+  def destroy
+    @agenda.destroy
+    AgendaMailer.agenda_mail(@agenda).deliver
+    redirect_to dashboard_url
+  end
   private
 
   def set_agenda
